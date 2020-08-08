@@ -1,0 +1,24 @@
+#Week 6
+#Using python to access web data
+
+#The program will prompt for a URL, read the JSON data from that URL using urllib and 
+#then parse and extract the comment counts from the JSON data, compute the sum of the numbers in the file
+
+import json
+import urllib.request, urllib.parse, urllib.error
+
+url = input('Enter url - ')
+print('Retrieving ', url)
+
+data = urllib.request.urlopen(url).read().decode()
+info = json.loads(data)  
+
+print('Retrived ' + str(len(data)) + ' characters')
+
+print('Count:', len(info.get('comments')))
+
+sum = 0
+for item in info.get("comments"):
+        sum = sum + int(item.get("count"))
+
+print('Sum: ', sum)
